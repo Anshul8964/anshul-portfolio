@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anshul Gupta | Full Stack Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #050816;
+            --bg-soft: #0f172a;
+            --accent: #22c55e;
+            --accent-soft: rgba(34, 197, 94, 0.1);
+            --text-main: #e5e7eb;
+            --text-muted: #9ca3af;
+            --border-soft: rgba(148, 163, 184, 0.3);
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #1e293b 0, #020617 40%, #020617 100%);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px 16px 56px;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 18px 22px;
+            margin-bottom: 32px;
+            border-radius: 999px;
+            border: 1px solid var(--border-soft);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.85));
+            backdrop-filter: blur(18px);
+            position: sticky;
+            top: 12px;
+            z-index: 10;
+        }
+
+        .logo-text {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-circle {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--accent);
+        }
+
+        .logo-text h1 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .logo-text span {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        nav {
+            display: flex;
+            gap: 18px;
+            font-size: 14px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            padding: 6px 10px;
+            border-radius: 999px;
+            transition: all 0.2s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+            background: rgba(34, 197, 94, 0.06);
+        }
+
+        nav a.active {
+            color: #0b1120;
+            background: var(--accent);
+            font-weight: 600;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
+            gap: 26px;
+        }
+
+        @media (max-width: 840px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                border-radius: 20px;
+            }
+            nav {
+                width: 100%;
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+            main {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        .card {
+            border-radius: 22px;
+            padding: 22px 22px 20px;
+            background: radial-gradient(circle at top left, #1f2937 0, #020617 50%);
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.8);
+        }
+
+        .hero-title {
+            font-size: 32px;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+
+        .hero-title span {
+            color: var(--accent);
+        }
+
+        .hero-tagline {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .hero-highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            padding: 7px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            background: var(--accent-soft);
+            color: #bbf7d0;
+            margin-bottom: 18px;
+        }
+
+        .hero-highlight-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: var(--accent);
+            box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
+        }
+
+        .about-text {
+            font-size: 14px;
+            color: var(--text-main);
+            margin-bottom: 18px;
+        }
+
+        .about-text p + p {
+            margin-top: 8px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .btn {
+            font-size: 13px;
+            padding: 9px 16px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            background: transparent;
+            color: var(--text-main);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #22c55e, #4ade80);
+            color: #022c22;
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            filter: brightness(1.05);
+            transform: translateY(-1px);
+            box-shadow: 0 14px 30px rgba(34, 197, 94, 0.4);
+        }
+
+        .btn-ghost {
+            border-color: var(--border-soft);
+        }
+
+        .btn-ghost:hover {
+            border-color: rgba(148, 163, 184, 0.8);
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        .btn span.icon {
+            font-size: 14px;
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .section-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-pill {
+            font-size: 12px;
+            padding: 7px 11px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            background: rgba(15, 23, 42, 0.9);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .skill-pill span.dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .projects-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .project-item {
+            padding: 12px 0;
+            border-bottom: 1px dashed rgba(55, 65, 81, 0.9);
+        }
+
+        .project-item:last-child {
+            border-bottom: none;
+        }
+
+        .project-name {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .project-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .project-desc {
+            font-size: 13px;
+            color: var(--text-main);
+        }
+
+        .project-link {
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .project-link a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .project-link a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            font-size: 13px;
+        }
+
+        .contact-item label {
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .contact-item span {
+            color: var(--text-main);
+        }
+
+        .badge-inline {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(148, 163, 184, 0.4);
+        }
+
+        .badge-inline-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #38bdf8;
+        }
+
+        footer {
+            margin-top: 28px;
+            font-size: 11px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header>
+            <div class="logo-text">
+                <div class="logo-circle">A</div>
+                <div>
+                    <h1>Anshul Gupta</h1>
+                    <span>Full Stack Developer</span>
+                </div>
+            </div>
+            <nav>
+                <a href="#about" class="active">About</a>
+                <a href="#education">Education</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- ABOUT SECTION -->
+            <section class="card" id="about">
+                <div class="hero-highlight">
+                    <span class="hero-highlight-dot"></span>
+                    <span>Full Stack Developer • Frontend & Backend</span>
+                </div>
+                <h2 class="hero-title">
+                    Hi, I'm <span>Anshul</span>.<br />
+                    I build web applications end-to-end.
+                </h2>
+                <p class="hero-tagline">
+                    I can handle both frontend and backend — from clean UI to scalable APIs.
+                </p>
+
+                <div class="about-text">
+                    <p>
+                        I’m a self-driven full stack developer who enjoys building practical, real-world products.
+                        I work with modern web technologies to create dashboards, tools and features that are fast,
+                        clean and easy to use.
+                    </p>
+                    <p>
+                        On the backend side, I have experience with Python and Node.js, and I’ve recently been working
+                        with PHP (Laravel). On the frontend, I focus on writing modular, maintainable code and
+                        delivering interfaces that feel smooth and responsive.
+                    </p>
+                    <p>
+                        I love learning by doing — ship quickly, get feedback, and improve the product step by step.
+                    </p>
+                </div>
+
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        <span class="icon">🚀</span>
+                        View My Projects
+                    </a>
+                    <a href="#contact" class="btn btn-ghost">
+                        <span class="icon">📩</span>
+                        Contact Me
+                    </a>
+                    <a href="resume.pdf" class="btn btn-ghost" download>
+                        <span class="icon">📄</span>
+                        Download Resume
+                    </a>
+                </div>
+            </section>
+
+            <!-- RIGHT COLUMN -->
+            <section class="right-column">
+
+                <!-- EDUCATION -->
+                <div class="card" id="education">
+                    <h3 class="section-title">Education</h3>
+                    <div class="about-text" style="font-size: 13px;">
+                        <p>
+                            <strong>B.Tech – Computer Science & Engineering</strong><br>
+                            AKTU University, Lucknow<br>
+                            <span style="color: var(--text-muted);">2021 – 2024</span>
+                        </p>
+
+                        <p>
+                            <strong>Diploma – Civil Engineering</strong><br>
+                            BTEUP, Lucknow<br>
+                            <span style="color: var(--text-muted);">2018 – 2021</span>
+                        </p>
+
+                        <p>
+                            <strong>10th – CBSE</strong><br>
+                            Bloomingdale School, Budaun<br>
+                            <span style="color: var(--text-muted);">2018</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- SKILLS -->
+                <div class="card" id="skills">
+                    <h3 class="section-title">Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skill-pill">
+                            <span class="dot"></span> Python
+                        </div>
+                        <div class="skill-pill">
+                            <span class="dot"></span> Node.js
+                        </div>
+                        <div class="skill-pill">
+                            <span class="dot"></span> Java (Basic)
+                        </div>
+                        <div class="skill-pill">
+                            <span class="dot"></span> PHP (Laravel)
+                        </div>
+                        <div class="skill-pill">
+                            <span class="dot"></span> REST APIs
+                        </div>
+                        <div class="skill-pill">
+                            <span class="dot"></span> Dashboards & Admin Panels
+                        </div>
+                        <div class="skill-pill">
+                            <span class="dot"></span> Problem Solving
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJECTS -->
+                <div class="card" id="projects">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <h3 class="section-title">Projects</h3>
+                        <div class="badge-inline">
+                            <span class="badge-inline-dot"></span>
+                            <span>Recently active</span>
+                        </div>
+                    </div>
+
+                    <div class="projects-list">
+                        <article class="project-item">
+                            <h4 class="project-name">bschoolbuzz.in</h4>
+                            <div class="project-meta">
+                                Exam prep & community platform • Dashboard & Core Pages
+                            </div>
+                            <p class="project-desc">
+                                Developed multiple key parts of the platform including the main dashboard,
+                                CAT PYQ page, XAT PYQ page and the Our Team page. Worked on both frontend
+                                and backend side to keep the flow clean, fast and easy to navigate for students.
+                            </p>
+                            <p class="project-link">
+                                Main Website:
+                                <a href="https://bschoolbuzz.in/" target="_blank" rel="noopener noreferrer">
+                                    https://bschoolbuzz.in/
+                                </a>
+                            </p>
+                            <p class="project-link">
+                                CAT PYQ Page:
+                                <a href="https://bschoolbuzz.in/cat" target="_blank" rel="noopener noreferrer">
+                                    https://bschoolbuzz.in/cat
+                                </a>
+                            </p>
+                            <p class="project-link">
+                                XAT PYQ Page:
+                                <a href="https://bschoolbuzz.in/xat" target="_blank" rel="noopener noreferrer">
+                                    https://bschoolbuzz.in/xat
+                                </a>
+                            </p>
+                            <p class="project-link">
+                                Our Team Page:
+                                <a href="https://bschoolbuzz.in/our-team" target="_blank" rel="noopener noreferrer">
+                                    https://bschoolbuzz.in/our-team
+                                </a>
+                            </p>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- CONTACT -->
+                <div class="card" id="contact">
+                    <h3 class="section-title">Contact</h3>
+                    <div class="contact-grid">
+                        <div class="contact-item">
+                            <label>Email</label>
+                            <span>
+                                <a href="mailto:guptaanshul8964@gmail.com"
+                                   style="color: var(--accent); text-decoration: none;">
+                                    guptaanshul8964@gmail.com
+                                </a>
+                            </span>
+                        </div>
+                        <div class="contact-item">
+                            <label>Location</label>
+                            <span>India</span>
+                        </div>
+                        <div class="contact-item">
+                            <label>GitHub</label>
+                            <span>
+                                <em>Coming soon</em>
+                            </span>
+                        </div>
+                        <div class="contact-item">
+                            <label>LinkedIn</label>
+                            <span>
+                                <a href="https://www.linkedin.com/in/anshul-gupta-0a5154354"
+                                   target="_blank" rel="noopener noreferrer"
+                                   style="color: var(--accent); text-decoration: none;">
+                                    linkedin.com/in/anshul-gupta-0a5154354
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            © <span id="year"></span> Anshul Gupta
+        </footer>
+    </div>
+
+    <script>
+        // Set current year automatically
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
